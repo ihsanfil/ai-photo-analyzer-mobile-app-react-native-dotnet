@@ -1,32 +1,11 @@
-import React, {useState} from 'react';
-import {Text, View} from 'react-native';
-import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
+import React,{useState} from 'react';
+import {Text,View} from 'react-native';
+import {QueryClient,QueryClientProvider} from '@tanstack/react-query';
 import {HomeScreen} from './src/screens/HomeScreen';
 import {PreviewScreen} from './src/screens/PreviewScreen';
 import {ResultScreen} from './src/screens/ResultScreen';
 import {HistoryScreen} from './src/screens/HistoryScreen';
-import {Button, styles} from './src/components/UI';
-
-const queryClient = new QueryClient();
-
-function ErrorScreen({navigation}: any) {
-  return <View style={{flex: 1, backgroundColor: '#10101D', padding: 24, justifyContent: 'center'}}>
-    <Text style={{color: '#fff', fontSize: 28, fontWeight: '800'}}>Something went wrong</Text>
-    <Text style={styles.muted}>Check that the backend is running, then try again.</Text>
-    <Button title="Try again" onPress={() => navigation.goBack()} />
-  </View>;
-}
-
-export default function App() {
-  const [route, setRoute] = useState('Home');
-  const [params, setParams] = useState<any>({});
-  const navigation = {
-    navigate: (name: string, nextParams?: any) => { setParams(nextParams || {}); setRoute(name); },
-    replace: (name: string, nextParams?: any) => { setParams(nextParams || {}); setRoute(name); },
-    goBack: () => setRoute('Home'),
-    popToTop: () => { setParams({}); setRoute('Home'); },
-  };
-  const screens: any = {Home: HomeScreen, Preview: PreviewScreen, Result: ResultScreen, History: HistoryScreen, Error: ErrorScreen};
-  const Screen = screens[route] || HomeScreen;
-  return <QueryClientProvider client={queryClient}><Screen navigation={navigation} route={{params}} /></QueryClientProvider>;
-}
+import {Button,Card,Header,Screen,colors,styles} from './src/components/UI';
+const queryClient=new QueryClient();
+function ErrorScreen({navigation,route}:any){const uri=route?.params?.uri;return <Screen><Header page="Analysis Detail" onBack={()=>navigation.goBack()}/><Text style={styles.eyebrow}>STATE HANDLERS & NEURAL FALLBACKS</Text><Text style={styles.hero}>Diagnostics Console</Text><Text style={styles.muted}>Node v2.4-opt</Text><View style={styles.chipRow}><Text style={styles.pillText}>OFFLINE</Text><Text style={styles.pillText}>CORRUPT</Text><Text style={styles.pillText}>NEURAL</Text></View><Card style={{borderColor:'#7D3035',borderWidth:1}}><Text style={{color:colors.error,fontSize:18,fontWeight:'800'}}>Unable to connect to Vision API</Text><Text style={[styles.muted,{marginTop:8}]}>The Gemini multimodal analysis service is temporarily unreachable or your device is experiencing network latency. Your photo buffer is safely saved locally.</Text><Text style={[styles.eyebrow,{marginTop:16}]}>ENGINE DIAGNOSTIC</Text><Text style={styles.muted}>HTTP 503 • Vision Pipeline Timeout • Auto-Retry Ready</Text></Card><Card><Text style={styles.heading}>Subsystem Status</Text><View style={styles.status}><View style={styles.statusDot}/><Text style={styles.muted}>Local Pipeline Active (DSP/NPU)</Text></View><View style={styles.status}><View style={[styles.statusDot,{backgroundColor:colors.error}]}/><Text style={styles.muted}>Cloud Gateway 503 Degraded</Text></View></Card><Card><Text style={styles.eyebrow}>VALIDATION ERROR</Text><Text style={styles.heading}>Unsupported Format or Resolution</Text><Text style={[styles.muted,{marginTop:8}]}>Please ensure your file is in JPEG, PNG, or HEIC format and under 25MB with a minimum resolution of 640×480.</Text><Text style={[styles.muted,{marginTop:10}]}>Auto-convert to HEIC on import</Text></Card><Button title="Retry Analysis" onPress={()=>uri?navigation.replace('Preview'):navigation.popToTop()}/><Button title="Pick Another Photo" secondary onPress={()=>navigation.popToTop()}/></Screen>}
+export default function App(){const [route,setRoute]=useState('Home');const [params,setParams]=useState<any>({});const navigation={navigate:(name:string,p?:any)=>{setParams(p||{});setRoute(name)},replace:(name:string,p?:any)=>{setParams(p||{});setRoute(name)},goBack:()=>setRoute('Home'),popToTop:()=>{setParams({});setRoute('Home')}};const screens:any={Home:HomeScreen,Preview:PreviewScreen,Result:ResultScreen,History:HistoryScreen,Error:ErrorScreen};const ScreenComponent=screens[route]||HomeScreen;return <QueryClientProvider client={queryClient}><ScreenComponent navigation={navigation} route={{params}}/></QueryClientProvider>}
