@@ -1,4 +1,4 @@
-# AI Photo Analyzer Mobile App | React Native + .NET Gemini Multimodal
+# Lumina AI Photo Analyzer Mobile App | React Native + .NET Gemini Multimodal
 
 Production-minded AI photo analysis mobile application built with React Native CLI, TypeScript, ASP.NET Core Web API, C# and Gemini multimodal AI.
 
