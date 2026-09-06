@@ -39,6 +39,15 @@ The `docs/screens/` SVG previews document the intended UI when no emulator is av
 ![Home](docs/screens/home.svg)
 ![Analysis result](docs/screens/result.svg)
 
+## Seeded Stitch demo data
+
+The mobile app includes the same local demo photography used by the Stitch UI so the History and Analysis Report screens are immediately reviewable after installation. These assets are bundled into the APK and do not require an external image host.
+
+![Alpine Sunrise Reflection](mobile/assets/stitch/alpine-thumbnail.jpg)
+![Golden Gate Foggy Dusk](mobile/assets/stitch/golden-gate.jpg)
+![Street Portrait Tokyo Rain](mobile/assets/stitch/tokyo-rain.jpg)
+![Architectural Minimalism](mobile/assets/stitch/architectural-minimalism.jpg)
+
 ## Quick start
 
 ### Backend
