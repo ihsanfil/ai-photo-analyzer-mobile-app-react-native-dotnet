@@ -97,8 +97,6 @@ backend/                 ASP.NET Core API
   Services/              Gemini integration and demo result
 mobile/src/              screens, components, API, state and navigation
 docs/screens/             documentation UI previews
-rehber.html               non-technical setup guide
-nedir.html                interview learning guide
 ```
 
 ## Interview talking points
